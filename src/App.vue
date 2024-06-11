@@ -1,10 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="home">
+    home
+    <p>My name is {{ name }} and my age is {{ age }}</p>
+    <button @click="handleClick">click me</button>
+  </div>
 </template>
+
+<script>
+export default {
+  name: "Home",
+  setup() {
+    console.log("set up");
+
+    let name = "mario";
+    let age = 30;
+
+    const handleClick = () => {
+      console.log("you clicked me");
+    };
+
+    return { name, age, handleClick };
+  },
+};
+</script>
 
 <style>
 #app {
@@ -13,18 +31,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
