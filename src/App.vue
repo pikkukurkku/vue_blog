@@ -7,10 +7,14 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   name: "Home",
   setup() {
-    console.log("set up");
+    console.log(this)
+
+    const p = ref
 
     let name = "mario";
     let age = 30;
