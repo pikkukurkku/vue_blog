@@ -1,59 +1,25 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <input type="text" v-model="search" />
-    <p>search term - {{ search }}</p>
-    <div v-for="name in matchingNames" :key="name">{{ name }}</div>
-    <button @click="handleClick">stop watching</button>
+    <PostList :posts="posts" />
   </div>
 </template>
 
 <script>
-import { computed, ref, watch, watchEffect } from "vue";
+import PostList from './components/PostList.vue'
+import { ref } from "vue";
 
 export default {
   name: "Home",
+  components: { PostList },
   setup() {
-    const search = ref("");
-    const names = ref([
-      "mario",
-      "yoshi",
-      "luigi",
-      "toad",
-      "bowser",
-      "koopa",
-      "peach",
-    ]);
+    const posts = ref([
+      {title: 'welcome to the blog', body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus hic nobis quos dolor maxime nihil asperiores modi omnis error tempore. Corporis consequuntur ratione ducimus earum?', id: 1 },
+      {title: 'top 5 css tips', body: 'lorem impsum', id: 2 }
+    ])
 
-    const stopWatch = watch(search, () => {
-      console.log('watch function ran')
-    })
-
-    const stopEffect = watchEffect(() => {
-      console.log('watchEffect function ran', search.value)
-    })
-
-
-    const matchingNames = computed(() => {
-      return names.value.filter((name) => name.includes(search.value));
-    })
-
-    const handleClick = () => {
-      stopWatch()
-      stopEffect()
-    }
-
-    return { names, search, matchingNames, handleClick };
+    return { posts };
   },
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
